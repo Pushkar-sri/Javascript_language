@@ -113,3 +113,43 @@ console.log(myMotorcycle.start()); // Output: "Harley starts with a kick."
  * 6. Built-in Objects: Predefined objects like Date, Math, etc.
  * 7. Custom Objects: User-defined objects created using constructors or classes.
  */ 
+
+/******** async & await *********/
+async function fetchData() {
+  try {
+    let response = await fetch("https://api.example.com/data");
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+fetchData();
+
+/******** Promises *********/
+function fetchDataWithPromise() {
+  return new Promise((resolve, reject) => {
+    fetch("https://api.example.com/data")
+      .then(response => response.json())
+      .then(data => resolve(data))
+      .catch(error => reject(error));
+  });
+}
+fetchDataWithPromise()
+  .then(data => console.log(data))
+  .catch(error => console.error("Error fetching data:", error));
+
+/******** Callbacks *********/
+function fetchDataWithCallback(callback) {
+  fetch("https://api.example.com/data")
+    .then(response => response.json())
+    .then(data => callback(null, data))
+    .catch(error => callback(error, null));
+}
+fetchDataWithCallback((error, data) => {
+  if (error) {
+    console.error("Error fetching data:", error);
+  } else {
+    console.log(data);
+  }
+});
